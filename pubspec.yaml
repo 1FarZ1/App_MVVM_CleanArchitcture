@@ -1,0 +1,52 @@
+name: providerlearn
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.4
+  easy_localization: ^3.0.1
+  flutter_phoenix: ^1.1.0
+  flutter_svg: ^1.1.5
+  retrofit: ^3.0.1+1
+  analyzer: ^5.1.0
+  dio: ^4.0.6
+  json_serializable: ^6.5.3
+  json_annotation: ^4.7.0
+  dartz: ^0.10.1
+  internet_connection_checker: ^0.0.1+4
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  retrofit_generator: ^4.1.2
+  build_runner: ^2.3.2
+flutter:
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Light.ttf
+          weight: 300
+
