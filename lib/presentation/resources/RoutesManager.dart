@@ -9,6 +9,8 @@ import 'package:providerlearn/presentation/onboarding/onBoarding_View.dart';
 import 'package:providerlearn/presentation/register/Register_View.dart';
 import 'package:providerlearn/presentation/resources/StringManager.dart';
 
+
+
 class Routes {
   static const String splashRoute = "/";
   static const String loginRoute = "/login";

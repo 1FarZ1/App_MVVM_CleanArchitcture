@@ -1,5 +1,6 @@
 import 'package:providerlearn/data/DataSource/remote_data_source.dart';
 import 'package:providerlearn/data/Network/NetworkInfo.dart';
+import 'package:providerlearn/data/Network/error_handler.dart';
 import 'package:providerlearn/data/mapper/mapper.dart';
 import 'package:providerlearn/domaine/models/Models.dart';
 import 'package:providerlearn/data/Network/requests.dart';
@@ -16,25 +17,33 @@ class RepositoryImpl implements Repository{
   @override
   Future<Either<Failure, Auth>> login(LoginRequest loginRequest) async{
 
+    
     if(await _netWorkInfo.isConnected){
+
+      try{
      
         final response = await _remoteDataSource.login(loginRequest);
-        if(response.status ==0){
+        if(response.status == 0){
           return Right(response.toDomaine());
         }
         else{
-          return Left(Failure(code: 409, message: response.message ?? "Bussiness Logic"));
+          return Left(DataSource.DEFAULT.getFailure());
         }
       
+      }
+      catch(e){
+        return Left(ErrorHandler.handle(e).failure);
+      }
+      }
     
 
 
     }
     else{
-    return Left(Failure(code: 0, message: "No Internet Connection",));
+    return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
   }
 
   }
   
 
-}
