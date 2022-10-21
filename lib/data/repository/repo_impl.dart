@@ -37,13 +37,11 @@ class RepositoryImpl implements Repository{
       }
     
 
-
-    }
     else{
     return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
-
-  }
+  
+    }
   
 
