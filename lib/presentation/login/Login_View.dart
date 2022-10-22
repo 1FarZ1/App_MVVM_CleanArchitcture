@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: file_names, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _loginViewModel =LoginViewModel();
+  final LoginViewModel _loginViewModel = LoginViewModel();
   _bind() {
     _loginViewModel.start();
   }
@@ -33,3 +34,5 @@ class _LoginViewState extends State<LoginView> {
     return Container();
   }
 }
+
+

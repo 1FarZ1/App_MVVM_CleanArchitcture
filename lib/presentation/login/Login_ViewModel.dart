@@ -1,7 +1,11 @@
 // ignore_for_file: non_constant_identifier_names, unused_element
 import 'dart:async';
 
+import 'package:providerlearn/domaine/UseCase/LoginUseCase.dart';
+import 'package:providerlearn/domaine/models/Models.dart';
 import 'package:providerlearn/presentation/base/baseviewmodel.dart';
+import 'package:providerlearn/presentation/common/freezed_data_classes.dart';
+
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutPuts {
@@ -9,6 +13,10 @@ class LoginViewModel extends BaseViewModel
       StreamController<String>.broadcast();
   final StreamController _passWordstreamController =
       StreamController<String>.broadcast();
+  final LoginObject _loginObject = LoginObject("", "");
+  final LoginUseCase _loginUseCase;
+
+  LoginViewModel(this._loginUseCase);
 
   @override
   void dispose() {
@@ -30,18 +38,28 @@ class LoginViewModel extends BaseViewModel
   Sink get InputUserName => _passWordstreamController.sink;
 
   @override
-  login() {
-    throw UnimplementedError();
+  login() async {
+    (await _loginUseCase.excute(LoginUseCaseInput(
+        email: _loginObject.userName, password: _loginObject.password)))
+        .fold(
+          (fail) => {
+            fail.message
+          }
+        , (data) =>{
+            data.customer
+        } );
   }
 
   @override
   setPassword(String password) {
-    throw UnimplementedError();
+    InputPassword.add(password);
+    _loginObject.copyWith(password: password);
   }
 
   @override
   setUsername(String uname) {
-    throw UnimplementedError();
+    InputUserName.add(uname);
+    _loginObject.copyWith(userName: uname);
   }
   //OUTPUTS
 
