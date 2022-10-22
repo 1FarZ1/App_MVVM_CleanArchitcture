@@ -22,6 +22,7 @@ dependencies:
   internet_connection_checker: ^0.0.1+4
   pretty_dio_logger: ^1.2.0-beta-1
   shared_preferences: ^2.0.15
+  get_it: ^7.2.0
   
   
 

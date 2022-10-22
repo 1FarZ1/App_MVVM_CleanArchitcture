@@ -2,9 +2,12 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:providerlearn/app/dependacyinjection.dart';
 import 'package:providerlearn/presentation/login/Login_ViewModel.dart';
 import 'package:providerlearn/presentation/resources/ColorManager.dart';
 import 'package:providerlearn/presentation/resources/ImageManager.dart';
+import 'package:providerlearn/presentation/resources/RoutesManager.dart';
 import 'package:providerlearn/presentation/resources/StringManager.dart';
 import 'package:providerlearn/presentation/resources/ValuesManager.dart';
 
@@ -16,7 +19,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _loginViewModel = LoginViewModel();
+  final LoginViewModel _loginViewModel = instance<LoginViewModel>();
   final TextEditingController _UsernametextEditingController =
       TextEditingController();
   final TextEditingController _PasswordtextEditingController =
@@ -49,6 +52,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _getContentWidget() {
     return Scaffold(
+      backgroundColor: ColorManager.white,
       body: Container(
         padding: const EdgeInsets.only(top: AppPadding.p100),
         color: ColorManager.white,
@@ -107,25 +111,56 @@ class _LoginViewState extends State<LoginView> {
                     }),
               ),
               const SizedBox(
-                height: AppSize.s40,
+                height: AppSize.s28,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28),
                 child: StreamBuilder<bool>(
                     stream: _loginViewModel.outisInputsValid,
                     builder: (context, snapshot) {
-                      return ElevatedButton(
-                          onPressed: (snapshot.data == true)
-                              ? () async {
-                                  await _loginViewModel.login();
-                                }
-                              : null,
-                          child: Text(
-                            AppStrings.login,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ));
+                      return SizedBox(
+                        width: AppSize.s220,
+                        height: AppSize.s50,
+                        child: ElevatedButton(
+                            onPressed: (snapshot.data == true)
+                                ? () async {
+                                    await _loginViewModel.login();
+                                  }
+                                : null,
+                            child: Text(
+                              AppStrings.login,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            )),
+                      );
                     }),
               ),
+
+                 Padding(
+                    padding: const EdgeInsets.only(
+                        top: AppPadding.p8,
+                        left: AppPadding.p28,
+                        right: AppPadding.p28),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.forgotPasswordRoute);
+                          },
+                          child: Text(AppStrings.forgetPassword,
+                              style: Theme.of(context).textTheme.titleMedium),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.registerRoute);
+                          },
+                          child: Text(AppStrings.registerText,
+                              style: Theme.of(context).textTheme.titleMedium),
+                        )
+                      ],
+                    )),
             ],
           ),
         )),

@@ -16,10 +16,9 @@ class LoginViewModel extends BaseViewModel
       StreamController<void>.broadcast();
   LoginObject _loginObject = LoginObject("", "");
 
-  // final LoginUseCase _loginUseCase;
+  final LoginUseCase _loginUseCase;
 
-  // LoginViewModel(this._loginUseCase);
-  LoginViewModel();
+  LoginViewModel(this._loginUseCase);
   @override
   void dispose() {
     // Perfomance Issues ~ U need to Stop The Controller after using it ~
@@ -46,9 +45,9 @@ class LoginViewModel extends BaseViewModel
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @override
   login() async {
-    // (await _loginUseCase.excute(LoginUseCaseInput(
-    //         email: _loginObject.userName, password: _loginObject.password)))
-    //     .fold((fail) => {fail.message}, (data) => {data.customer});
+    (await _loginUseCase.excute(LoginUseCaseInput(
+            email: _loginObject.userName, password: _loginObject.password)))
+        .fold((fail) => {fail.message}, (data) => {data.customer});
   }
 
   @override
@@ -58,9 +57,9 @@ class LoginViewModel extends BaseViewModel
     // 1 h of looking for solution  old version [_loginObject.copyWith(password: password);]
     _loginObject=_loginObject.copyWith(password: password);
     isInputsValid.add(null); // we pass null because we dont need the value
-    // passed in the stream all we need is
-    //the password and email passed in the other
-    //streams to check it in the stream if its valid and he can login
+                             // passed in the stream all we need is
+                             //the password and email passed in the other
+                             //streams to check it in the stream if its valid and he can login
   }
 
   @override

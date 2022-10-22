@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:providerlearn/app/dependacyinjection.dart';
 import 'package:providerlearn/presentation/ForgetPassword/forget_Password.dart';
 import 'package:providerlearn/presentation/Splash/Splash_view.dart';
 import 'package:providerlearn/presentation/StoreDetails/StoreDetails_View.dart';
@@ -27,7 +28,7 @@ class RouteGenerator {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
       case Routes.loginRoute:
-        // initLoginModule();
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBoardingView());
