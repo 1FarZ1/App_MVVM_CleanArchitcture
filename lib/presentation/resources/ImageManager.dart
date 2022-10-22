@@ -5,7 +5,7 @@ const kJSONPATH="assets/json";
 
 class ImageAssets{
 
- static const String splashLogo = "$kIMAGEPATH/splash_logo.png";
+ static const String splashLogo = "$kIMAGEPATH/space.jpg";
   static const String onboardingLogo1 = "$kIMAGEPATH/onboarding_logo1.svg";
   static const String onboardingLogo2 = "$kIMAGEPATH/onboarding_logo2.svg";
   static const String onboardingLogo3 = "$kIMAGEPATH/onboarding_logo3.svg";
@@ -21,6 +21,7 @@ class ImageAssets{
   static const String logoutIc = "$kIMAGEPATH/logout_ic.svg";
   static const String rightArrowSettingsIc =
       "$kIMAGEPATH/right_arrow_settings_ic.svg";
+  static const String astroNout ="$kIMAGEPATH/space.jpg";
 }
 
 class JsonAssets {

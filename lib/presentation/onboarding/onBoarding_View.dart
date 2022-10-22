@@ -7,6 +7,7 @@ import 'package:providerlearn/presentation/onboarding/OnBoarding_ViewModel.dart'
 import 'package:providerlearn/presentation/resources/ColorManager.dart';
 import 'package:providerlearn/presentation/resources/ConstsManager.dart';
 import 'package:providerlearn/presentation/resources/ImageManager.dart';
+import 'package:providerlearn/presentation/resources/RoutesManager.dart';
 import 'package:providerlearn/presentation/resources/StringManager.dart';
 import 'package:providerlearn/presentation/resources/ValuesManager.dart';
 import 'package:providerlearn/presentation/resources/ThemeManager.dart';
@@ -25,9 +26,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   _Bind() {
     _onBoardingViewModel.start();
   }
+
   @override
   void initState() {
-    
     super.initState();
     // hawlik wch ysralk ki t9ra 3la 2 pm nsit bch najouti lbind l init state  ## dbrstni bzaf
     _Bind();
@@ -174,7 +175,9 @@ class OnBoardingPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () => print("pressed"),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                  },
                   child: Text(
                     AppStrings.skip,
                     style: Theme.of(context).textTheme.titleMedium,

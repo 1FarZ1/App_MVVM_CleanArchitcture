@@ -1,4 +1,3 @@
-
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 // 1. Color Manager (Farz Bek) --- My Knowledge ---
@@ -9,11 +8,11 @@ import 'package:flutter/material.dart';
 // and we will use it in the ThemeManager
 // and for the perfomance we will use the const keyword to make the color constant
 // and we will use the static keyword to make the color static so we can access it without creating an instance of the class
-// and its easier to change the colors of the app from one place only (the ColorManager) 
-//instead of searching for the color in the code and change it from there 
+// and its easier to change the colors of the app from one place only (the ColorManager)
+//instead of searching for the color in the code and change it from there
 
-class ColorManager{
-  static Color primary = const Color.fromARGB(255, 86, 9, 209);
+class ColorManager {
+  static Color primary = const Color(0xff9D92FF);
   static Color darkGrey = const Color(0xff525252);
   static Color grey = const Color(0xff737477);
   static Color lightGrey = const Color(0xff9E9E9E);
