@@ -4,7 +4,7 @@ class Constants {
   static const String BaseURL = "https://farz777.mocklab.io/";
   static const String Empty = "";
   static const int Zero = 0;
-  static const Api_TimeOut = 6000;
+  static const Api_TimeOut = 15000;
   static const String Token = "";
   static const String ProjectName = "ProviderLearn";
 }

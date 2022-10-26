@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:dio/dio.dart';
 import 'package:providerlearn/app/consts.dart';
 import 'package:providerlearn/data/Response/responses.dart';
@@ -12,6 +14,13 @@ factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
 @POST("customer/login")
 Future<AuthResponse> login(
   @Field("email") String email, @Field("password") String password
+  );
+
+
+// 1. first we add the request and response models
+@POST("customer/forgetpassword")
+Future<ForgetPasswordResponse> ForgetPassword(
+  @Field("email") String email
   );
 
 }

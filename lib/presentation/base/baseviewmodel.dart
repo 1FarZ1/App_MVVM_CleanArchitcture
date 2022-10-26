@@ -1,17 +1,40 @@
+import 'dart:async';
 
-abstract class BaseViewModel extends BaseViewModelInputs with BaseViewModelOutputs{
+import 'package:providerlearn/presentation/common/state_renderer/state_renderer_impl.dart';
 
+abstract class BaseViewModel extends BaseViewModelInputs
+    with BaseViewModelOutputs {
+  StreamController _inputStreamController =
+      StreamController<FlowState>.broadcast();
+
+  @override
+  void dispose() {
+    _inputStreamController.close();
+  }
+
+  @override
+  void start() {}
+
+  @override
+  Sink get inputState => _inputStreamController.sink;
+
+  @override
+  Stream<FlowState> get outputState =>
+      _inputStreamController.stream.map((flowState) => flowState);
 }
+
 abstract class BaseViewModelInputs {
   void start(); // start view model job ( N3ytolo ki ybda view model lkhdma)
 
-  void dispose(); // will be called when view model dies ( N3ytolo ki ykml  view model lkhdma)
+  void
+      dispose(); // will be called when view model dies ( N3ytolo ki ykml  view model lkhdma)
+  Sink get inputState;
 
   // Sink get inputState;
 }
 
 abstract class BaseViewModelOutputs {
-
+  Stream<FlowState> get outputState;
 }
 
 
@@ -23,14 +46,7 @@ abstract class BaseViewModelOutputs {
 // abstract class BaseViewModel extends BaseViewModelInputs
 //     with BaseViewModelOutputs {
 //   // shared variables and function that will be used through any view model.
-//   final StreamController _inputStreamController =
-//       BehaviorSubject<FlowState>();
 
-//   @override
-//   Sink get inputState => _inputStreamController.sink;
-
-//   @override
-//   Stream<FlowState> get outputState => _inputStreamController.stream.map((flowState) => flowState);
 
 //   @override
 //   void dispose() {

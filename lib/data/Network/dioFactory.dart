@@ -14,7 +14,7 @@ const String Authorization = "authorization";
 const String DefaultLanguage = "language";
 
 class DioFactory {
-  AppPreferences _appPreferences ;
+  final AppPreferences _appPreferences ;
   DioFactory(
     this._appPreferences);
   

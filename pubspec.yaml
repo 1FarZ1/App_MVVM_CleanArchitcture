@@ -23,6 +23,8 @@ dependencies:
   pretty_dio_logger: ^1.2.0-beta-1
   shared_preferences: ^2.0.15
   get_it: ^7.2.0
+  lottie: ^1.4.2
+  carousel_slider: ^4.1.1
   
   
 
@@ -41,6 +43,7 @@ flutter:
   assets:
     - assets/images/
     - assets/myPersonalImages/
+    - assets/json/
 
   fonts:
     - family: Montserrat

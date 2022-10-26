@@ -17,6 +17,7 @@ class OnBoardingViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    super.dispose();
     _streamController.close();
   }
 
@@ -37,7 +38,7 @@ class OnBoardingViewModel extends BaseViewModel
     _currentPageindex = (_currentPageindex - 1 == -1)
         ? _sliderDataList.length
         : _currentPageindex - 1;
-            _sendDataToView();
+    _sendDataToView();
     return _currentPageindex;
   }
 
@@ -46,7 +47,7 @@ class OnBoardingViewModel extends BaseViewModel
     _currentPageindex = (_currentPageindex + 1) == (_sliderDataList.length + 1)
         ? 0
         : _currentPageindex + 1;
-            _sendDataToView();
+    _sendDataToView();
 
     return _currentPageindex;
   }

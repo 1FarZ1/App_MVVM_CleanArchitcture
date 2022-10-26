@@ -1,4 +1,6 @@
 import 'package:providerlearn/data/Response/responses.dart';
+import 'package:providerlearn/data/Response/responses.dart';
+
 import 'package:providerlearn/domaine/models/Models.dart';
 import "package:providerlearn/app/extensions.dart";
 
@@ -9,7 +11,8 @@ extension CustomerResponseMapper on CustomerResponse? {
     return Customer(
         id: this?.id.orEmpty() ?? Constants.Empty,
         name: this?.name.orEmpty() ?? Constants.Empty,
-        numberofNotifications: this?.numberofNotifications.orZero() ?? Constants.Zero);
+        numberofNotifications:
+            this?.numberofNotifications.orZero() ?? Constants.Zero);
   }
 }
 
@@ -21,14 +24,17 @@ extension ContactsResponseMapper on ContactsResponse? {
         link: this?.link.orEmpty() ?? Constants.Empty);
   }
 }
+
 extension AuthResponseMapper on AuthResponse? {
   Auth toDomaine() {
     return Auth(
-       customer: this?.customer.toDomaine(),
-        contacts: this?.contact.toDomaine()
-    );
+        customer: this?.customer.toDomaine(),
+        contacts: this?.contact.toDomaine());
   }
 }
 
-
-
+extension ForgetPasswordResponseMapper on ForgetPasswordResponse? {
+  String toDomaine() {
+    return this?.support.orEmpty() ?? Constants.Empty;
+  }
+}

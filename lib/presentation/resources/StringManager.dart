@@ -18,13 +18,13 @@ class AppStrings {
 
   // Login
   static const skip = "skip";
-  static const username = "username_hint";
-  static const password = "password_hint";
+  static const username = "Enter Your Username";
+  static const password = "Enter Your Username";
   static const usernameError = "username_error";
   static const passwordError = "password_error";
-  static const login = "login_button";
-  static const forgetPassword = "forgot_password_text";
-  static const registerText = "register_text";
+  static const login = "Sign In";
+  static const forgetPassword = "Forget Password ?";
+  static const registerText = "Sign Up";
   // Loading
   static const loading = "loading";
 
@@ -35,10 +35,10 @@ class AppStrings {
   static const String invalidEmail = "email_error";
   static const String resetPassword = "reset_password";
   static const String success = "success";
-  static const String userNameInvalid = "username_hint_message";
+  static const String userNameInvalid = "";
   static const String mobileNumberInvalid =
       "mobile_number_hint_message";
-  static const String passwordInvalid = "password_hint_message";
+  static const String passwordInvalid = "";
   static const String alreadyHaveAccount = "already_have_account";
   static const register = "register";
   static const mobileNumber = "mobile_number_hint";

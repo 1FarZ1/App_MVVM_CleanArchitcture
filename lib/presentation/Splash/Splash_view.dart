@@ -1,8 +1,10 @@
-// ignore_for_file: unused_field, file_names
+// ignore_for_file: unused_field, file_names, non_constant_identifier_names
 
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:providerlearn/app/dependacyinjection.dart';
+import 'package:providerlearn/app/preferences.dart';
 import 'package:providerlearn/presentation/resources/ColorManager.dart';
 import 'package:providerlearn/presentation/resources/ConstsManager.dart';
 import 'package:providerlearn/presentation/resources/ImageManager.dart';
@@ -17,24 +19,50 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Timer? _timer;
+  final AppPreferences _appPreferences= instance<AppPreferences>();
 
   _startDelay() {
-    _timer = Timer(const Duration(seconds: AppConstants.splashDelay),
-        () => Navigator.pushReplacementNamed(context, Routes.onBoardingRoute));
+    _timer = Timer(const Duration(seconds: AppConstants.splashDelay), () {
+      _appPreferences.IsLoggedIn().then((IsUserLoggedIn) =>
+      { 
+
+        if(IsUserLoggedIn == true ){
+            Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)
+        }
+        else{
+          _appPreferences.OnBoardingScreenViewed().then((BoardingViewed) => {
+            if(BoardingViewed ==true){
+              Navigator.pushReplacementNamed(context, Routes.loginRoute)
+            }
+            else{
+              Navigator.pushReplacementNamed(context, Routes.onBoardingRoute)
+            }
+          })
+
+        }
+      } 
+      );
+    
+    });
   }
 
   @override
   void initState() {
-
     super.initState();
     _startDelay();
   }
+
   @override
   void dispose() {
-    
     _timer?.cancel();
     super.dispose();
-   
+  }
+
+  // to cache images and other stuff before the user see the app
+  @override
+  void didChangeDependencies() {
+    precacheImage(const AssetImage(ImageAssets.splashLogo), context);
+    super.didChangeDependencies();
   }
 
   @override
