@@ -107,9 +107,9 @@ class RegisterViewModel extends BaseViewModel
         return _isUsernameValid(Username);
       });
   @override
-  Stream<bool> get OutputsProfilePic =>
+  Stream<File> get OutputsProfilePic =>
       _ProfilePicStreamController.stream.map((ProfilePic) {
-        return _isProfilePicValid(ProfilePic);
+        return ProfilePic;
       });
 
   @override
@@ -177,6 +177,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setEmail(String Email) {
+    InputEmail.add(Email);
     if (_isEmailValid(Email)) {
       registerObject = registerObject.copyWith(email: Email);
     } else {
@@ -187,6 +188,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setMobileNumber(String Mobilenumber) {
+      InputsMobileNumber.add(Mobilenumber);
     if (_isMobileValid(Mobilenumber)) {
       registerObject = registerObject.copyWith(mobileNumber: Mobilenumber);
     } else {
@@ -197,6 +199,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setPassword(String Password) {
+    InputsPass.add(Password);
     if (_isPassValid(Password)) {
       registerObject = registerObject.copyWith(password: Password);
     } else {
@@ -207,6 +210,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setUsername(String Username) {
+    InputsUsername.add(Username);
     if (_isUsernameValid(Username)) {
       registerObject = registerObject.copyWith(userName: Username);
     } else {
@@ -217,6 +221,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setProfilePic(File ProfilePic) {
+    InputsProfilePic.add(ProfilePic);
     if (_isProfilePicValid(ProfilePic)) {
       registerObject = registerObject.copyWith(profilePicture: ProfilePic.path);
     } else {
@@ -260,6 +265,6 @@ abstract class RegisterViewModelOutputs {
   Stream<bool> get OutputsUsername;
   Stream<String?> get OutputsErrorUsername;
 
-  Stream<bool> get OutputsProfilePic;
+  Stream<File> get OutputsProfilePic;
   Stream<bool> get OutputsAreAllValid;
 }

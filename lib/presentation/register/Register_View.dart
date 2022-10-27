@@ -1,7 +1,10 @@
 // ignore_for_file: file_names
 
+import 'dart:io';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:providerlearn/app/consts.dart';
 import 'package:providerlearn/app/dependacyinjection.dart';
@@ -21,6 +24,7 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  final ImagePicker _imagePicker = instance<ImagePicker>();
   final TextEditingController _UsernametextEditingController =
       TextEditingController();
   final TextEditingController _PasswordtextEditingController =
@@ -194,26 +198,24 @@ class _RegisterViewState extends State<RegisterView> {
                 height: AppSize.s14,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p50),
-                child: StreamBuilder<bool>(
-                    stream: _registerViewModel.OutputsProfilePic,
-                    builder: (context, snapshot) {
-                      return Container(
-                        height: AppSize.s40,
-                        decoration: BoxDecoration(
-                          color: ColorManager.lightGrey,
-                          border: Border.all(color: ColorManager.lightGrey),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            _showPicker(context);
-                          },
-                          child: _getMediaWidget(),
-                        ),
-                      );
-                    }),
-              ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p50),
+                  child: Container(
+                    height: AppSize.s50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: ColorManager.grey,
+                        width: 1.3,
+                      ),
+                      borderRadius: BorderRadius.circular(AppSize.s14),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        _showPicker(context);
+                      },
+                      child: _getMediaWidget(),
+                    ),
+                  )),
               const SizedBox(
                 height: AppSize.s28,
               ),
@@ -253,14 +255,77 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   Widget _getMediaWidget() {
-    return Row(
-      children: [
-        
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p14),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+              flex: 2,
+              child: Text(
+                AppStrings.profilePicture,
+                style: Theme.of(context).textTheme.bodyLarge,
+              )),
+          Flexible(
+              child: StreamBuilder<File>(
+            stream: _registerViewModel.OutputsProfilePic,
+            builder: (context, snapshot) {
+              return _imagepicked(snapshot.data);
+            },
+          )),
+          Flexible(child: SvgPicture.asset(ImageAssets.photoCameraIc))
+        ],
+      ),
     );
   }
 
-  _showPicker(BuildContext context) {}
+  //TODO:ADD cahr7 l had function :
+  Widget _imagepicked(File? fileImage) {
+    if (fileImage != null && fileImage.path.isNotEmpty) {
+      return Image.file(fileImage);
+    } else {
+      return Container();
+    }
+  }
+
+  _showPicker(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return SafeArea(
+            child: Wrap(direction: Axis.vertical, children: [
+              ListTile(
+                leading: const Icon(Icons.browse_gallery),
+                trailing: const Icon(Icons.arrow_forward),
+                title: const Text(AppStrings.photoGallery),
+                onTap: () {
+                  _pickImageFromGallery();
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt_outlined),
+                trailing: const Icon(Icons.arrow_forward),
+                title: const Text(AppStrings.photoCamera),
+                onTap: () {
+                  _pickImageFromCamera();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
+          );
+        });
+  }
+
+  void _pickImageFromGallery() async {
+    XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
+    _registerViewModel.setProfilePic(File(image?.path ?? " "));
+  }
+
+  void _pickImageFromCamera() async {
+    XFile? image = await _imagePicker.pickImage(source: ImageSource.camera);
+    _registerViewModel.setProfilePic(File(image?.path ?? ""));
+  }
 }
 
 class AlreadyHaveAccountTextButton extends StatelessWidget {
@@ -278,7 +343,7 @@ class AlreadyHaveAccountTextButton extends StatelessWidget {
           top: AppPadding.p8, left: AppPadding.p28, right: AppPadding.p28),
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.loginRoute);
+          Navigator.of(context).pop();
         },
         child: Text(AppStrings.alreadyHaveAccount,
             style: Theme.of(context).textTheme.titleMedium),

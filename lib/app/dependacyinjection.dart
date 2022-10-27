@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:providerlearn/app/preferences.dart';
 import 'package:providerlearn/data/DataSource/remote_data_source.dart';
@@ -90,6 +91,8 @@ Future<void> initRegisterModule() async {
       instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance<Repository>()));
 
   instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance<RegisterUseCase>()));
+
+   instance.registerFactory<ImagePicker>(() => ImagePicker());
 
   }
 }
