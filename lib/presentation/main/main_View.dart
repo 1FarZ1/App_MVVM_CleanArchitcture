@@ -2,6 +2,10 @@
 // import 'package:advanced_flutter_arabic/presentation/main/pages/notifications/notifications_page.dart';
 // import 'package:advanced_flutter_arabic/presentation/main/pages/search/search_page.dart';
 // import 'package:advanced_flutter_arabic/presentation/main/pages/settings/settings_page.dart';
+import 'package:providerlearn/presentation/main/pages/home/view/home_page.dart';
+import 'package:providerlearn/presentation/main/pages/notifications/notifications_page.dart';
+import 'package:providerlearn/presentation/main/pages/search/search_page.dart';
+import 'package:providerlearn/presentation/main/pages/settings/settings_page.dart';
 import 'package:providerlearn/presentation/resources/ColorManager.dart';
 import 'package:providerlearn/presentation/resources/StringManager.dart';
 import 'package:providerlearn/presentation/resources/ValuesManager.dart';
@@ -16,11 +20,11 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  List<Widget> pages = [
-    // HomePage(),
-    // SearchPage(),
-    // NotificationsPage(),
-    // SettingsPage()
+  List<Widget> pages = const [
+    HomePage(),
+    SearchPage(),
+    NotificationsPage(),
+    SettingsPage()
   ];
   List<String> titles = [
     AppStrings.home.tr(),

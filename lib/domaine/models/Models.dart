@@ -54,3 +54,19 @@ class Auth{
   });
 }
 
+class RegisterO{
+  String userName;
+  String countryMobileCode;
+  String mobileNumber;
+  String email;
+  String password;
+  String profilePicture;
+  RegisterO({
+    required this.userName,
+    required this.countryMobileCode,
+    required this.mobileNumber,
+    required this.email,
+    required this.password,
+    required this.profilePicture,
+  });
+}

@@ -7,6 +7,8 @@ abstract class RemoteDataSource {
   Future<AuthResponse> login(LoginRequest loginRequest);
 
   Future<ForgetPasswordResponse> forgetpassword(String email);
+
+  Future<AuthResponse> register(RegisterRequest registerRequest);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -22,7 +24,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<ForgetPasswordResponse> forgetpassword(String email) async {
-      return await _appServiceClient.ForgetPassword(email);
-    
+    return await _appServiceClient.ForgetPassword(email);
+  }
+
+  @override
+  Future<AuthResponse> register(RegisterRequest registerRequest) async {
+    return await _appServiceClient.Register(
+        registerRequest.userName,
+        registerRequest.countryMobileCode,
+        registerRequest.mobileNumber,
+        registerRequest.email,
+        registerRequest.password,
+        registerRequest.profilePicture);
   }
 }

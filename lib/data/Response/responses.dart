@@ -70,7 +70,7 @@ class ForgetPasswordResponse extends BaseResponse {
   @JsonKey(name: "support")
   String? support ;
   ForgetPasswordResponse(this.support);
-  
+
   factory ForgetPasswordResponse.fromJson(Map<String, dynamic> json) {
     return _$ForgetPasswordResponseFromJson(json);
   }
@@ -78,4 +78,25 @@ class ForgetPasswordResponse extends BaseResponse {
     return _$ForgetPasswordResponseToJson(this);
   }
 }
+// RegisterResponse
 
+// @JsonSerializable()
+// class RegisterResponse extends BaseResponse {
+//   @JsonKey(name: "username")
+//   @JsonKey(name: "countryMobileCode")
+//   @JsonKey(name:"email")
+  
+//   String? username;
+//   String? countryMobileCode;
+
+  
+//   String? support ;
+//   RegisterResponse(this.support);
+
+//   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
+//     return _$RegisterResponseFromJson(json);
+//   }
+//   Map<String,dynamic> toJson() {
+//     return _$RegisterResponseToJson(this);
+//   }
+// }

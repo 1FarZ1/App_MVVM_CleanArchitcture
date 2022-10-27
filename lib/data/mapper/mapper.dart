@@ -38,3 +38,14 @@ extension ForgetPasswordResponseMapper on ForgetPasswordResponse? {
     return this?.support.orEmpty() ?? Constants.Empty;
   }
 }
+
+// extension RegisterResponseMapper on RegisterResponse? {
+//   String toDomaine() {
+//     // return RegisterO(countryMobileCode: this?.countryMobileCode.orEmpty() ?? Constants.Empty,
+//     //     email: this?.email.orEmpty() ?? Constants.Empty,
+//     //     mobileNumber: this?.mobileNumber.orEmpty() ?? Constants.Empty,
+//     //     password: this?.password.orEmpty() ?? Constants.Empty,
+//     //     userName: this?.userName.orEmpty() ?? Constants.Empty, profilePicture: '');
+//     return "";
+//   }
+// }

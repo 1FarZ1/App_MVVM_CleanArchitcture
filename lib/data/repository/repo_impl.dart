@@ -55,4 +55,27 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Auth>> register(RegisterRequest registerRequest) async{
+    if (await _netWorkInfo.isConnected) {
+      try {
+        final AuthResponse response =
+            await _remoteDataSource.register(registerRequest);
+
+        if (response.status == 0) {
+          return Right(response.toDomaine());
+        } else {
+          return Left(Failure(
+              code: response.status ?? ResponseCode.DEFAULT,
+              message: response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (e) {
+        print("the error is $e");
+        return Left(ErrorHandler.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

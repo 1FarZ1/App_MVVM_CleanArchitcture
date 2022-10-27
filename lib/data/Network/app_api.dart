@@ -22,6 +22,15 @@ Future<AuthResponse> login(
 Future<ForgetPasswordResponse> ForgetPassword(
   @Field("email") String email
   );
+@POST("customer/register")
+Future<AuthResponse> Register(
+  @Field("userName") String userName,
+  @Field("countryMobileCode") String countryMobileCode,
+  @Field("mobileNumber") String mobileNumber,
+  @Field("email") String email,
+  @Field("password") String password,
+  @Field("profilePicture") String profilePicture
+  );
 
 }
 
