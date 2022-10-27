@@ -10,9 +10,11 @@ import 'package:providerlearn/data/Network/app_api.dart';
 import 'package:providerlearn/data/Network/dioFactory.dart';
 import 'package:providerlearn/data/repository/repo_impl.dart';
 import 'package:providerlearn/domaine/UseCase/LoginUseCase.dart';
+import 'package:providerlearn/domaine/UseCase/RegisterUseCase.dart';
 import 'package:providerlearn/domaine/UseCase/forgetPasswordUseCase.dart';
 import 'package:providerlearn/presentation/ForgetPassword/forget_password_ViewModel.dart';
 import 'package:providerlearn/presentation/login/Login_ViewModel.dart';
+import 'package:providerlearn/presentation/register/Register_ViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../domaine/repository/repository.dart';
@@ -78,6 +80,16 @@ Future<void> initForgetPasswordModule() async {
       instance.registerFactory<ForgetPasswordUseCase>(() => ForgetPasswordUseCase(instance<Repository>()));
 
   instance.registerFactory<ForgotPasswordViewModel>(() => ForgotPasswordViewModel(instance<ForgetPasswordUseCase>()));
+
+  }
+}
+Future<void> initRegister() async {
+  // Register Module is a module Where we Put All Depandencies Related to Register
+
+  if(!GetIt.I.isRegistered<RegisterUseCase>()){
+      instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance<Repository>()));
+
+  instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance<RegisterUseCase>()));
 
   }
 }
