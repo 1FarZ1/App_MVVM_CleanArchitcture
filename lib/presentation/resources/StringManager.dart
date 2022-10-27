@@ -39,7 +39,7 @@ class AppStrings {
   static const String mobileNumberInvalid =
       "mobile_number_hint_message";
   static const String passwordInvalid = "";
-  static const String alreadyHaveAccount = "already_have_account";
+  static const String alreadyHaveAccount = "already_have_account ? Log In";
   static const register = "register";
   static const mobileNumber = "mobile_number_hint";
   static const profilePicture = "upload_profile_picture";
