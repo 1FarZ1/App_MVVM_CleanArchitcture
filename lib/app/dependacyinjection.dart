@@ -83,7 +83,7 @@ Future<void> initForgetPasswordModule() async {
 
   }
 }
-Future<void> initRegister() async {
+Future<void> initRegisterModule() async {
   // Register Module is a module Where we Put All Depandencies Related to Register
 
   if(!GetIt.I.isRegistered<RegisterUseCase>()){
