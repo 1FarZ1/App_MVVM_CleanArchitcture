@@ -33,8 +33,8 @@ Future<AuthResponse> Register(
   );
 
 @GET("customer/home")
-Future<ProfileResponse> getProfile(
-  @Header("Authorization") String token
+Future<HomeResponse>getHome(
+
   );
 }
 

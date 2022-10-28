@@ -39,13 +39,47 @@ extension ForgetPasswordResponseMapper on ForgetPasswordResponse? {
   }
 }
 
-// extension RegisterResponseMapper on RegisterResponse? {
-//   String toDomaine() {
-//     // return RegisterO(countryMobileCode: this?.countryMobileCode.orEmpty() ?? Constants.Empty,
-//     //     email: this?.email.orEmpty() ?? Constants.Empty,
-//     //     mobileNumber: this?.mobileNumber.orEmpty() ?? Constants.Empty,
-//     //     password: this?.password.orEmpty() ?? Constants.Empty,
-//     //     userName: this?.userName.orEmpty() ?? Constants.Empty, profilePicture: '');
-//     return "";
-//   }
-// }
+extension ServiceMappper on ServiceResponse? {
+  Service toDomaine() {
+    return Service(
+        id: this?.id ?? Constants.Empty,
+        title: this?.title ?? Constants.Empty,
+        imageUrl: this?.imageurl ?? Constants.Empty);
+  }
+}
+
+extension BannerMappper on BannerResponse? {
+  Banner toDomaine() {
+    return Banner(
+        id: this?.id ?? Constants.Empty,
+        link: this?.link ?? Constants.Empty,
+        title: this?.title ?? Constants.Empty,
+        imageUrl: this?.imageurl ?? Constants.Empty);
+  }
+}
+
+extension StoreMappper on StoreResponse? {
+  Store toDomaine() {
+    return Store(
+        id: this?.id ?? Constants.Empty,
+        title: this?.title ?? Constants.Empty,
+        imageUrl: this?.imageurl ?? Constants.Empty);
+  }
+}
+
+extension HomeDataMapper on HomeDataResponse? {
+  HomeData toDomaine() {
+    return HomeData(
+        services: this?.services?.map((e) => e.toDomaine()).toList() ?? [],
+        banners: this?.banners,
+        stores: this?.stores);
+  }
+}
+
+extension HomeResponseMapper on HomeResponse? {
+  HomeObject toDomaine() {
+    return HomeObject(
+      this?.data ?? 
+    );
+  }
+}

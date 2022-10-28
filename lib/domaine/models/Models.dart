@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: file_names, non_constant_identifier_names
 
-
 // OnBoarding Models
-
 
 class SliderObject {
   String HeadLine;
@@ -12,16 +10,16 @@ class SliderObject {
 
   SliderObject(this.HeadLine, this.Subline, this.image);
 }
+
 class SliderViewObject {
   SliderObject sliderObject;
   int numOfSlides;
   int currentIndex;
-  SliderViewObject(this.sliderObject,this.numOfSlides,this.currentIndex);
+  SliderViewObject(this.sliderObject, this.numOfSlides, this.currentIndex);
 }
 
 // Login Models
 class Customer {
-
   String id;
   String name;
   int numberofNotifications;
@@ -30,11 +28,9 @@ class Customer {
     required this.name,
     required this.numberofNotifications,
   });
-
 }
 
-
-class Contacts{
+class Contacts {
   String phone;
   String email;
   String link;
@@ -44,7 +40,8 @@ class Contacts{
     required this.link,
   });
 }
-class Auth{
+
+class Auth {
   Customer? customer;
   Contacts? contacts;
 
@@ -54,7 +51,7 @@ class Auth{
   });
 }
 
-class RegisterO{
+class RegisterO {
   String userName;
   String countryMobileCode;
   String mobileNumber;
@@ -69,4 +66,56 @@ class RegisterO{
     required this.password,
     required this.profilePicture,
   });
+}
+
+class Service {
+  String id;
+  String title;
+  String imageUrl;
+  Service({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+  });
+}
+
+class Store {
+  String id;
+  String title;
+  String imageUrl;
+  Store({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+  });
+}
+
+class Banner {
+  String id;
+  String title;
+  String imageUrl;
+  String link;
+  Banner({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.link,
+  });
+}
+
+class HomeData {
+  List<Service> services;
+  List<Service> banners;
+  List<Service> stores;
+  HomeData({
+    required this.services,
+    required this.banners,
+    required this.stores,
+  });
+}
+
+class HomeObject {
+  HomeData? homeData;
+  
+  HomeObject(this.homeData);
 }

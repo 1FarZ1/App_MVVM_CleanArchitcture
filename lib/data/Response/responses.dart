@@ -142,6 +142,7 @@ class StoreResponse {
   }
 }
 
+@JsonSerializable()
 class HomeDataResponse {
   @JsonKey(name: "Services")
   List<ServiceResponse>? services;
@@ -164,7 +165,7 @@ class HomeDataResponse {
  
 }
 
-
+@JsonSerializable()
 class HomeResponse extends BaseResponse {
   @JsonKey(name: "data")
   HomeDataResponse? data;
