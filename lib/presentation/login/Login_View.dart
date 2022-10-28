@@ -37,14 +37,16 @@ class _LoginViewState extends State<LoginView> {
     _PasswordtextEditingController.addListener(
         () => _loginViewModel.setPassword(_PasswordtextEditingController.text));
 
-    _loginViewModel.isUserLoggedInSuccefully.stream.listen((IsLoggedIn) {
-      if (IsLoggedIn) {
-        _appPreferences.setIsLoggedIn();
-        SchedulerBinding.instance.addPostFrameCallback((_) {
-          Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
-        });
-      }
-    });
+    _loginViewModel.isUserLoggedInSuccefully.stream.listen(
+      (IsLoggedIn) {
+        if (IsLoggedIn) {
+          _appPreferences.setIsLoggedIn();
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+          });
+        }
+      },
+    );
     // bch kol ma ytbdl text fihom nbdl uname we pass fe view model
     // tell loginviewmodel to start the job ;
   }
@@ -166,8 +168,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, Routes.registerRoute);
+                          Navigator.pushNamed(context, Routes.registerRoute);
                         },
                         child: Text(AppStrings.registerText,
                             style: Theme.of(context).textTheme.titleMedium),

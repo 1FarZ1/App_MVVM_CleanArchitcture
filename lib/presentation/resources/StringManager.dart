@@ -19,9 +19,9 @@ class AppStrings {
   // Login
   static const skip = "skip";
   static const username = "Enter Your Username";
-  static const password = "Enter Your Username";
-  static const usernameError = "username_error";
-  static const passwordError = "password_error";
+  static const password = "Enter Your Password";
+  static const usernameError = "Username not available";
+  static const passwordError = "password doesn not match";
   static const login = "Sign In";
   static const forgetPassword = "Forget Password ?";
   static const registerText = "Sign Up";
@@ -31,20 +31,20 @@ class AppStrings {
   // Retry
   static const retryAgain = "retry_again";
   static const ok = "ok";
-  static const String emailHint = 'email_hint';
-  static const String invalidEmail = "email_error";
+  static const String emailHint = 'Enter Your Email Adress';
+  static const String invalidEmail = "Email is not valid";
   static const String resetPassword = "reset_password";
   static const String success = "success";
-  static const String userNameInvalid = "";
+  static const String userNameInvalid = "UsernameNotValid";
   static const String mobileNumberInvalid =
-      "mobile_number_hint_message";
-  static const String passwordInvalid = "";
+      "Mobile Number is not valid, Please enter a valid mobile number";
+  static const String passwordInvalid = "Password does not match";
   static const String alreadyHaveAccount = "already_have_account ? Log In";
   static const register = "register";
-  static const mobileNumber = "mobile_number_hint";
-  static const profilePicture = "upload_profile_picture";
-  static const photoGallery = "photo_from_galley";
-  static const photoCamera = "photo_from_camera";
+  static const mobileNumber = "Pls Enter Your Mobile Number";
+  static const profilePicture = "pls Upload Your Profile Picture";
+  static const photoGallery = "Pick a Picture From Gallery";
+  static const photoCamera = "Take A Photo";
   static const home = "home";
   static const notifications = "notification";
   static const search = "search";

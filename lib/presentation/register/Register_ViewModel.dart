@@ -24,6 +24,7 @@ class RegisterViewModel extends BaseViewModel
       StreamController<String>.broadcast();
   final StreamController _ProfilePicStreamController =
       StreamController<File>.broadcast();
+  final StreamController isUserLoggedInSuccefully = StreamController<bool>();
 
   RegisterUseCase _registerUseCase;
   RegisterViewModel(this._registerUseCase);
@@ -52,6 +53,7 @@ class RegisterViewModel extends BaseViewModel
           .add(ErrorState(StateRendererType.popupErrorState, fail.message));
     }, (data) {
       inputState.add(SuccessState(AppStrings.register));
+      isUserLoggedInSuccefully.add(true);
     });
   }
 
@@ -65,6 +67,7 @@ class RegisterViewModel extends BaseViewModel
     _UsernameStreamController.close();
     _AllValidStreamController.close();
     _ProfilePicStreamController.close();
+    isUserLoggedInSuccefully.close();
   }
 
   @override

@@ -32,5 +32,10 @@ Future<AuthResponse> Register(
   @Field("profilePicture") String profilePicture
   );
 
+@GET("customer/home")
+Future<ProfileResponse> getProfile(
+  @Header("Authorization") String token
+  );
 }
+
 

@@ -4,10 +4,11 @@ import 'dart:io';
 
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:providerlearn/app/consts.dart';
 import 'package:providerlearn/app/dependacyinjection.dart';
+import 'package:providerlearn/app/preferences.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer_impl.dart';
 import 'package:providerlearn/presentation/register/Register_ViewModel.dart';
 import 'package:providerlearn/presentation/resources/ColorManager.dart';
@@ -36,6 +37,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   final _formKey = GlobalKey<FormState>();
   final RegisterViewModel _registerViewModel = instance<RegisterViewModel>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   _bind() {
     _registerViewModel.start();
@@ -47,6 +49,17 @@ class _RegisterViewState extends State<RegisterView> {
         .setMobileNumber(_MobileNumbertextEditingController.text));
     _EmailtextEditingController.addListener(() =>
         _registerViewModel.setCountryCode(_EmailtextEditingController.text));
+
+    _registerViewModel.isUserLoggedInSuccefully.stream.listen(
+      (IsLoggedIn) {
+        if (IsLoggedIn) {
+          _appPreferences.setIsLoggedIn();
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+          });
+        }
+      },
+    );
   }
 
   @override
@@ -127,8 +140,9 @@ class _RegisterViewState extends State<RegisterView> {
                         flex: 1,
                         child: CountryCodePicker(
                           onChanged: (country) {
-                            _registerViewModel.setCountryCode(
-                                country.code ?? Constants.Token);
+                            // Window Key + . == (🤣🤣🤣)
+                            _registerViewModel
+                                .setCountryCode(country.dialCode!);
                           },
                           initialSelection: '+02',
                           favorite: const ['+39', 'FR', "+966"],
@@ -141,7 +155,7 @@ class _RegisterViewState extends State<RegisterView> {
                           stream: _registerViewModel.OutputsErrorMobileNumber,
                           builder: (context, snapshot) {
                             return Expanded(
-                              flex: 4,
+                              flex: 2,
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
                                 controller: _MobileNumbertextEditingController,
@@ -288,12 +302,13 @@ class _RegisterViewState extends State<RegisterView> {
     }
   }
 
-  _showPicker(BuildContext context) {
-    showModalBottomSheet(
+  Future<dynamic> _showPicker(BuildContext context) {
+    return showModalBottomSheet(
         context: context,
         builder: (context) {
           return SafeArea(
-            child: Wrap(direction: Axis.vertical, children: [
+              child: Wrap(
+            children: [
               ListTile(
                 leading: const Icon(Icons.browse_gallery),
                 trailing: const Icon(Icons.arrow_forward),
@@ -312,8 +327,8 @@ class _RegisterViewState extends State<RegisterView> {
                   Navigator.of(context).pop();
                 },
               ),
-            ]),
-          );
+            ],
+          ));
         });
   }
 
