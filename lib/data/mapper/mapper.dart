@@ -42,44 +42,84 @@ extension ForgetPasswordResponseMapper on ForgetPasswordResponse? {
 extension ServiceMappper on ServiceResponse? {
   Service toDomaine() {
     return Service(
-        id: this?.id ?? Constants.Empty,
-        title: this?.title ?? Constants.Empty,
-        imageUrl: this?.imageurl ?? Constants.Empty);
+        id: this?.id.orEmpty() ?? Constants.Empty,
+        title: this?.title.orEmpty() ?? Constants.Empty,
+        imageUrl: this?.imageurl.orEmpty() ?? Constants.Empty);
   }
 }
 
 extension BannerMappper on BannerResponse? {
   Banner toDomaine() {
     return Banner(
-        id: this?.id ?? Constants.Empty,
-        link: this?.link ?? Constants.Empty,
-        title: this?.title ?? Constants.Empty,
-        imageUrl: this?.imageurl ?? Constants.Empty);
+        id: this?.id.orEmpty() ?? Constants.Empty,
+        link: this?.link.orEmpty() ?? Constants.Empty,
+        title: this?.title.orEmpty() ?? Constants.Empty,
+        imageUrl: this?.imageurl.orEmpty() ?? Constants.Empty);
   }
 }
 
 extension StoreMappper on StoreResponse? {
   Store toDomaine() {
     return Store(
-        id: this?.id ?? Constants.Empty,
-        title: this?.title ?? Constants.Empty,
-        imageUrl: this?.imageurl ?? Constants.Empty);
+        id: this?.id.orEmpty() ?? Constants.Empty,
+        title: this?.title.orEmpty() ?? Constants.Empty,
+        imageUrl: this?.imageurl.orEmpty() ?? Constants.Empty);
   }
 }
 
-extension HomeDataMapper on HomeDataResponse? {
-  HomeData toDomaine() {
-    return HomeData(
-        services: this?.services?.map((e) => e.toDomaine()).toList() ?? [],
-        banners: this?.banners,
-        stores: this?.stores);
-  }
-}
+// TODO: Implement this Extension and use it in the mapper li t7t
+// extension HomeDataMapper on HomeDataResponse? {
+//   HomeData toDomaine() {
+//     return HomeData(
+//         services: (this
+//                     ?.services
+//                     ?.map((serviceResponse) => serviceResponse.toDomaine()) ??
+//                 const Iterable.empty())
+//             .cast<Service>()
+//             .toList(),
+//         banners: (this
+//                     ?.banners
+//                     ?.map((bannerResponse) => bannerResponse.toDomaine()) ??
+//                 const Iterable.empty())
+//             .cast<Banner>()
+//             .toList(),
+//         stores:
+//             (this?.stores?.map((storeResponse) => storeResponse.toDomaine()) ??
+//                     const Iterable.empty())
+//                 .cast<Store>()
+//                 .toList());
+//   }
+// }
 
 extension HomeResponseMapper on HomeResponse? {
   HomeObject toDomaine() {
-    return HomeObject(
-      this?.data ?? 
-    );
+
+    // njibo services w banners w stores mn data li 9blha li hiya homedataResponse we nverifiyw ida valid ida valid nb3toha ida nn nb3to [empty] 
+    var services = (this
+                ?.data
+                ?.services
+                ?.map((serviceResponse) => serviceResponse.toDomaine()) ??
+            const Iterable.empty())
+        .cast<Service>()
+        .toList();
+    var banners = (this
+                ?.data
+                ?.banners
+                ?.map((bannerResponse) => bannerResponse.toDomaine()) ??
+            const Iterable.empty())
+        .cast<Banner>()
+        .toList();
+    var stores = (this
+                ?.data
+                ?.stores
+                ?.map((storeResponse) => storeResponse.toDomaine()) ??
+            const Iterable.empty())
+        .cast<Store>()
+        .toList();
+    return HomeObject(homeData: HomeData(
+        services: services,
+        banners: banners,
+        stores: stores
+        ));
   }
 }

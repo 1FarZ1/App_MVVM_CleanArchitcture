@@ -6,6 +6,7 @@ import 'package:providerlearn/domaine/models/Models.dart';
 abstract class Repository {
   Future<Either<Failure, Auth>> login(LoginRequest loginRequest);
   Future<Either<Failure, String>> forgetpassword(String email);
-   Future<Either<Failure, Auth>> register(RegisterRequest registerRequest);
+  Future<Either<Failure, Auth>> register(RegisterRequest registerRequest);
+  Future<Either<Failure, HomeObject>> getHome();
 }
 

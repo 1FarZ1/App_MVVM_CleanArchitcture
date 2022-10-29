@@ -33,9 +33,7 @@ Future<AuthResponse> Register(
   );
 
 @GET("customer/home")
-Future<HomeResponse>getHome(
-
-  );
+Future<HomeResponse>getHome();
 }
 
 

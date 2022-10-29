@@ -105,8 +105,8 @@ class Banner {
 
 class HomeData {
   List<Service> services;
-  List<Service> banners;
-  List<Service> stores;
+  List<Banner> banners;
+  List<Store> stores;
   HomeData({
     required this.services,
     required this.banners,
@@ -116,6 +116,9 @@ class HomeData {
 
 class HomeObject {
   HomeData? homeData;
-  
-  HomeObject(this.homeData);
+  HomeObject({
+    this.homeData,
+  });
+
+
 }

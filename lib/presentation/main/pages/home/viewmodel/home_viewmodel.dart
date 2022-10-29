@@ -4,14 +4,15 @@ import 'dart:ffi';
 import 'package:providerlearn/domaine/Models/Models.dart';
 import 'package:providerlearn/domaine/UseCase/home_usecase.dart';
 import 'package:providerlearn/presentation/base/baseviewmodel.dart';
-// import 'package:rxdart/rxdart.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../common/state_renderer/state_renderer.dart';
 import '../../../../common/state_renderer/state_renderer_impl.dart';
 
 class HomeViewModel extends BaseViewModel
     with HomeViewModelInput, HomeViewModelOutput {
-  final _dataStreamController = StreamController<String>(); // BehaviorSubject<HomeViewObject>();
+  final _dataStreamController =
+      StreamController<String>(); // BehaviorSubject<HomeViewObject>();
 
   final HomeUseCase _homeUseCase;
 
@@ -35,12 +36,11 @@ class HomeViewModel extends BaseViewModel
       // right -> data (success)
       // content
       inputState.add(ContentState());
-      inputHomeData.add("test");  
+      inputHomeData.add("test");
       // navigate to main screen
 
-
-      // HomeViewObject(homeObject.data.stores,
-         // homeObject.data.services, homeObject.data.banners)
+      // HomeViewObject(homeObject.homeData.stores, homeObject.homeData.services,
+      //     homeObject.homeData.banners);
     });
   }
 
@@ -67,10 +67,10 @@ abstract class HomeViewModelOutput {
   Stream<String> get outputHomeData;
 }
 
-// class HomeViewObject {
-//   List<Store> stores;
-//   List<Service> services;
-//   List<BannerAd> banners;
+class HomeViewObject {
+  List<Store> stores;
+  List<Service> services;
+  List<Banner> banners;
 
-//   HomeViewObject(this.stores, this.services, this.banners);
-// }
+  HomeViewObject(this.stores, this.services, this.banners);
+}
