@@ -13,8 +13,10 @@ import 'package:providerlearn/data/repository/repo_impl.dart';
 import 'package:providerlearn/domaine/UseCase/LoginUseCase.dart';
 import 'package:providerlearn/domaine/UseCase/RegisterUseCase.dart';
 import 'package:providerlearn/domaine/UseCase/forgetPasswordUseCase.dart';
+import 'package:providerlearn/domaine/UseCase/home_usecase.dart';
 import 'package:providerlearn/presentation/ForgetPassword/forget_password_ViewModel.dart';
 import 'package:providerlearn/presentation/login/Login_ViewModel.dart';
+import 'package:providerlearn/presentation/main/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:providerlearn/presentation/register/Register_ViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,6 +95,18 @@ Future<void> initRegisterModule() async {
   instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance<RegisterUseCase>()));
 
    instance.registerFactory<ImagePicker>(() => ImagePicker());
+
+  }
+}
+//
+
+Future<void> initHomeModule() async {
+  // Register Module is a module Where we Put All Depandencies Related to Register
+
+  if(!GetIt.I.isRegistered<HomeUseCase>()){
+      instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance<Repository>()));
+
+  instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance<HomeUseCase>()));
 
   }
 }

@@ -11,7 +11,9 @@ class HomeUseCase implements BaseUseCase<void, HomeObject> {
   );
   @override
   Future<Either<Failure, HomeObject>> excute(void input) async {
-    return await _repo.getHome();
+    var x = await _repo.getHome();
+    print(x.fold((l) => print("sorry")
+    , (r) => print(r.homeData?.banners)));
+    return x;
   }
 }
-

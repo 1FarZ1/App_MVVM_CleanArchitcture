@@ -48,16 +48,16 @@ class DioFactory {
         ),
       );
     // this for The Forget Password that pass a String instead of a json
-    //     _dio.interceptors.add(
-    //   InterceptorsWrapper(
-    //     onResponse: (response, handler) {
-    //       if (response.requestOptions.method == HttpMethod.POST) {
-    //         response.data = jsonDecode(response.data as String);
-    //       }
-    //       return handler.next(response);
-    //     },
-    //   ),
-    // );
+        _dio.interceptors.add(
+      InterceptorsWrapper(
+        onResponse: (response, handler) {
+          if (response.requestOptions.method == HttpMethod.POST || response.requestOptions.method == HttpMethod.GET) {
+            response.data = jsonDecode(response.data as String);
+          }
+          return handler.next(response);
+        },
+      ),
+    );
     }
   
     return _dio;

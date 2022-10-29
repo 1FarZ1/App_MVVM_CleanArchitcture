@@ -39,11 +39,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         registerRequest.password,
         registerRequest.profilePicture);
   }
-  
-  @override
-  Future<HomeResponse> getHome() async{
 
-    return await _appServiceClient.getHome(); 
-    
+  @override
+  Future<HomeResponse> getHome() async {
+    var x = await _appServiceClient.getHome();
+    print("remote data source  ${x.data!.banners}");
+    return x;
   }
 }
+
+//TODO: FIX THE NULL Problem

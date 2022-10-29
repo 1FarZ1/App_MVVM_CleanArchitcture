@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:ffi';
 
-import 'package:providerlearn/domaine/Models/Models.dart';
+import 'package:providerlearn/domaine/Models/Models.dart' as model;
 import 'package:providerlearn/domaine/UseCase/home_usecase.dart';
+import 'package:providerlearn/domaine/models/Models.dart';
 import 'package:providerlearn/presentation/base/baseviewmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -11,8 +12,7 @@ import '../../../../common/state_renderer/state_renderer_impl.dart';
 
 class HomeViewModel extends BaseViewModel
     with HomeViewModelInput, HomeViewModelOutput {
-  final _dataStreamController =
-      StreamController<String>(); // BehaviorSubject<HomeViewObject>();
+  final _dataStreamController = BehaviorSubject<HomeViewObject>();
 
   final HomeUseCase _homeUseCase;
 
@@ -36,11 +36,16 @@ class HomeViewModel extends BaseViewModel
       // right -> data (success)
       // content
       inputState.add(ContentState());
-      inputHomeData.add("test");
-      // navigate to main screen
 
-      // HomeViewObject(homeObject.homeData.stores, homeObject.homeData.services,
-      //     homeObject.homeData.banners);
+
+      inputHomeData.add(HomeViewObject(
+        homeObject.homeData!.stores,
+        homeObject.homeData!.services,
+        homeObject.homeData!.banners,
+      ));
+      // homeObject.homeData!.services,
+      //   homeObject.homeData!.banners));
+      // navigate to main screen
     });
   }
 
@@ -55,7 +60,7 @@ class HomeViewModel extends BaseViewModel
 
   // -- outputs
   @override
-  Stream<String> get outputHomeData =>
+  Stream<HomeViewObject> get outputHomeData =>
       _dataStreamController.stream.map((data) => data);
 }
 
@@ -64,7 +69,7 @@ abstract class HomeViewModelInput {
 }
 
 abstract class HomeViewModelOutput {
-  Stream<String> get outputHomeData;
+  Stream<HomeViewObject> get outputHomeData;
 }
 
 class HomeViewObject {
