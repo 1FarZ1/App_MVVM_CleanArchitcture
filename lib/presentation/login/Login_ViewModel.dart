@@ -8,15 +8,16 @@ import 'package:providerlearn/presentation/base/baseviewmodel.dart';
 import 'package:providerlearn/presentation/common/freezed_data_classes.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer_impl.dart';
+import 'package:rxdart/rxdart.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutPuts {
   final StreamController _userNamestreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _passWordstreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _isLoginValidstreamController =
-      StreamController<void>.broadcast();
+      BehaviorSubject<void>();
   final StreamController isUserLoggedInSuccefully = StreamController<bool>();
   LoginObject _loginObject = LoginObject("", "");
 

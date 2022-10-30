@@ -6,13 +6,14 @@ import 'package:providerlearn/domaine/UseCase/forgetPasswordUseCase.dart';
 import 'package:providerlearn/presentation/base/baseviewmodel.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer_impl.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel
     with ForgotPasswordViewModelInputs, ForgotPasswordViewModelOutputs {
   final StreamController _IsAllInputValidStreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _IsEmailValidStreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
 
   @override
   void dispose() {

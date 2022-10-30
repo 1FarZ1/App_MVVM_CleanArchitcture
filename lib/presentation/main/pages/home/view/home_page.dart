@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, snapshot) {
          
           return Column(
+            // A gauche
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _getBannerWidget(snapshot.data?.banners),
@@ -65,7 +66,6 @@ class _HomePageState extends State<HomePage> {
               _getStoresWidget(snapshot.data?.stores),
             ],
           );
-          ;
         });
   }
 

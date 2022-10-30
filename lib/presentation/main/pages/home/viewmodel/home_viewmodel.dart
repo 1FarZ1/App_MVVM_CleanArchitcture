@@ -39,9 +39,9 @@ class HomeViewModel extends BaseViewModel
 
 
       inputHomeData.add(HomeViewObject(
-        homeObject.homeData!.stores,
-        homeObject.homeData!.services,
-        homeObject.homeData!.banners,
+        homeObject.homeData.stores,
+        homeObject.homeData.services,
+        homeObject.homeData.banners,
       ));
       // homeObject.homeData!.services,
       //   homeObject.homeData!.banners));

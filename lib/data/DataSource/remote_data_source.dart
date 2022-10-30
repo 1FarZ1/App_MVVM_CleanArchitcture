@@ -42,9 +42,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<HomeResponse> getHome() async {
-    var x = await _appServiceClient.getHome();
-    print("remote data source  ${x.data!.banners}");
-    return x;
+    var response = await _appServiceClient.getHome();
+    print(response.data!.banners);
+    return response;
   }
 }
 

@@ -42,7 +42,7 @@ extension ForgetPasswordResponseMapper on ForgetPasswordResponse? {
 extension ServiceMappper on ServiceResponse? {
   Service toDomaine() {
     return Service(
-        id: this?.id.orEmpty() ?? Constants.Empty,
+        id: this?.id.orZero() ?? Constants.Zero,
         title: this?.title.orEmpty() ?? Constants.Empty,
         imageUrl: this?.imageurl.orEmpty() ?? Constants.Empty);
   }
@@ -51,7 +51,7 @@ extension ServiceMappper on ServiceResponse? {
 extension BannerMappper on BannerResponse? {
   Banner toDomaine() {
     return Banner(
-        id: this?.id.orEmpty() ?? Constants.Empty,
+        id: this?.id.orZero() ?? Constants.Zero,
         link: this?.link.orEmpty() ?? Constants.Empty,
         title: this?.title.orEmpty() ?? Constants.Empty,
         imageUrl: this?.imageurl.orEmpty() ?? Constants.Empty);
@@ -61,7 +61,7 @@ extension BannerMappper on BannerResponse? {
 extension StoreMappper on StoreResponse? {
   Store toDomaine() {
     return Store(
-        id: this?.id.orEmpty() ?? Constants.Empty,
+        id: this?.id.orZero() ?? Constants.Zero,
         title: this?.title.orEmpty() ?? Constants.Empty,
         imageUrl: this?.imageurl.orEmpty() ?? Constants.Empty);
   }

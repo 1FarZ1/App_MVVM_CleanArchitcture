@@ -86,7 +86,7 @@ class RepositoryImpl implements Repository {
       try {
         var response = await _remoteDataSource.getHome();
         if (response.status == 0) {
-          print("the response is ${response.toDomaine().homeData!.banners}");
+          print("the response is ${response.toDomaine().homeData.banners}");
           return Right(response.toDomaine());
         } else {
           print("Failure");

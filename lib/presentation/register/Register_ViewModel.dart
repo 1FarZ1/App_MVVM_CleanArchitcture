@@ -9,21 +9,22 @@ import 'package:providerlearn/presentation/common/freezed_data_classes.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer_impl.dart';
 import 'package:providerlearn/presentation/resources/StringManager.dart';
+import 'package:rxdart/rxdart.dart';
 
 class RegisterViewModel extends BaseViewModel
     with RegisterViewModelInputs, RegisterViewModelOutputs {
   final StreamController _AllValidStreamController =
-      StreamController<void>.broadcast();
+      BehaviorSubject<void>();
   final StreamController _EmailStreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _PassStreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _MobileStreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _UsernameStreamController =
-      StreamController<String>.broadcast();
+      BehaviorSubject<String>();
   final StreamController _ProfilePicStreamController =
-      StreamController<File>.broadcast();
+      BehaviorSubject<File>();
   final StreamController isUserLoggedInSuccefully = StreamController<bool>();
 
   RegisterUseCase _registerUseCase;

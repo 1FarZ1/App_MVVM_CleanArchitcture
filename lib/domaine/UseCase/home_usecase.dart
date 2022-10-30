@@ -13,7 +13,7 @@ class HomeUseCase implements BaseUseCase<void, HomeObject> {
   Future<Either<Failure, HomeObject>> excute(void input) async {
     var x = await _repo.getHome();
     print(x.fold((l) => print("sorry")
-    , (r) => print(r.homeData?.banners)));
+    , (r) => print(r.homeData.banners)));
     return x;
   }
 }

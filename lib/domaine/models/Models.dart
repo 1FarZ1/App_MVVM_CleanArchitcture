@@ -69,7 +69,7 @@ class RegisterO {
 }
 
 class Service {
-  String id;
+  int id;
   String title;
   String imageUrl;
   Service({
@@ -80,7 +80,7 @@ class Service {
 }
 
 class Store {
-  String id;
+  int id;
   String title;
   String imageUrl;
   Store({
@@ -91,7 +91,7 @@ class Store {
 }
 
 class Banner {
-  String id;
+  int id;
   String title;
   String imageUrl;
   String link;
@@ -115,9 +115,9 @@ class HomeData {
 }
 
 class HomeObject {
-  HomeData? homeData;
+  HomeData homeData;
   HomeObject({
-    this.homeData,
+    required this.homeData,
   });
 
 
