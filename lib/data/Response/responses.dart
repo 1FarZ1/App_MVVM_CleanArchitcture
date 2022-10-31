@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
+
 part 'responses.g.dart';
 
 //TODO: mnich fahm mlih had lpart ida chft had todo n3awd nrevisi had part t3 tcriyi fromjson tojson  we blablabla
@@ -178,4 +179,39 @@ class HomeResponse extends BaseResponse {
   Map<String, dynamic> toJson() {
     return _$HomeResponseToJson(this);
   }
+}
+
+@JsonSerializable()
+class StoreDetailsResponse extends BaseResponse {
+  @JsonKey(name:"id")
+  int? id;
+  @JsonKey(name:"image")
+  String? image;
+  @JsonKey(name:"title")
+  String? title;
+  @JsonKey(name:"details")  
+  String? details;
+  @JsonKey(name:"services")
+  String? services;
+  @JsonKey(name:"about")
+  String? about;
+  StoreDetailsResponse(
+     this.id,
+     this.image,
+     this.title,
+     this.details,
+     this.services,
+     this.about,
+  );
+
+
+   factory StoreDetailsResponse.fromJson(Map<String, dynamic> json) {
+    return _$StoreDetailsResponseFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return _$StoreDetailsResponseToJson(this);
+  }
+
+  
 }

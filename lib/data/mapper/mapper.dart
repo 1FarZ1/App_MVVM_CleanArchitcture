@@ -123,3 +123,17 @@ extension HomeResponseMapper on HomeResponse? {
         ));
   }
 }
+
+
+extension StoreDetailsResponseMapper on StoreDetailsResponse? {
+  StoreDetails toDomaine(){
+    return StoreDetails(
+      id: this?.id.orZero() ?? Constants.Zero,
+      title: this?.title.orEmpty() ?? Constants.Empty,
+     image:this?.image.orEmpty() ?? Constants.Empty,
+     details: this?.details.orEmpty() ?? Constants.Empty,
+     services: this?.services.orEmpty() ?? Constants.Empty,
+     about: this?.about.orEmpty() ?? Constants.Empty,
+    );
+  }
+}

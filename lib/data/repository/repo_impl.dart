@@ -111,4 +111,33 @@ class RepositoryImpl implements Repository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, StoreDetails>> getStoreDetails() async {
+    try {
+      StoreDetailsResponse response = await _localDataSource.getStoreDetails();
+      return Right(response.toDomaine());
+    } catch (cacheError) {
+      // theres no data from cache so we call from api and save it to cache
+      if (await _netWorkInfo.isConnected) {
+        try {
+          StoreDetailsResponse response = await _remoteDataSource.getStoreDetails();
+          if (response.status == 0) {
+            _localDataSource.SaveStoreDetailsToCache(response);
+            return Right(response.toDomaine());
+          } else {
+            print("Failure");
+            return Left(Failure(
+                code: response.status ?? ResponseCode.DEFAULT,
+                message: response.message ?? ResponseMessage.DEFAULT));
+          }
+        } catch (e) {
+          print("the error is $e");
+          return Left(ErrorHandler.handle(e).failure);
+        }
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    }
+  }
 }
