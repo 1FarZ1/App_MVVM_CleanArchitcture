@@ -1,3 +1,4 @@
+import 'package:providerlearn/data/DataSource/local_datasource.dart';
 import 'package:providerlearn/data/DataSource/remote_data_source.dart';
 import 'package:providerlearn/data/Network/NetworkInfo.dart';
 import 'package:providerlearn/data/Network/error_handler.dart';
@@ -12,8 +13,10 @@ import 'package:providerlearn/domaine/repository/repository.dart';
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final NetWorkInfo _netWorkInfo;
+  final LocalDataSource _localDataSource;
 
-  RepositoryImpl(this._remoteDataSource, this._netWorkInfo);
+  RepositoryImpl(
+      this._remoteDataSource, this._netWorkInfo, this._localDataSource);
 
   @override
   Future<Either<Failure, Auth>> login(LoginRequest loginRequest) async {
@@ -82,24 +85,30 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, HomeObject>> getHome() async {
-    if (await _netWorkInfo.isConnected) {
-      try {
-        var response = await _remoteDataSource.getHome();
-        if (response.status == 0) {
-          print("the response is ${response.toDomaine().homeData.banners}");
-          return Right(response.toDomaine());
-        } else {
-          print("Failure");
-          return Left(Failure(
-              code: response.status ?? ResponseCode.DEFAULT,
-              message: response.message ?? ResponseMessage.DEFAULT));
+    try {
+      var response = await _localDataSource.getHome();
+      return Right(response.toDomaine());
+    } catch (cacheError) {
+      // theres no data from cache so we call from api and save it to cache
+      if (await _netWorkInfo.isConnected) {
+        try {
+          var response = await _remoteDataSource.getHome();
+          if (response.status == 0) {
+            _localDataSource.SaveHomeToCache(response);
+            return Right(response.toDomaine());
+          } else {
+            print("Failure");
+            return Left(Failure(
+                code: response.status ?? ResponseCode.DEFAULT,
+                message: response.message ?? ResponseMessage.DEFAULT));
+          }
+        } catch (e) {
+          print("the error is $e");
+          return Left(ErrorHandler.handle(e).failure);
         }
-      } catch (e) {
-        print("the error is $e");
-        return Left(ErrorHandler.handle(e).failure);
+      } else {
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
-    } else {
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }

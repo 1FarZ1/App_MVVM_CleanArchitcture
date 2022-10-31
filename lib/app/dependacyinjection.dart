@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:providerlearn/app/preferences.dart';
+import 'package:providerlearn/data/DataSource/local_datasource.dart';
 import 'package:providerlearn/data/DataSource/remote_data_source.dart';
 import 'package:providerlearn/data/Network/NetworkInfo.dart';
 import 'package:providerlearn/data/Network/app_api.dart';
@@ -56,10 +57,10 @@ Future<void> initAppModule() async {
   // remote data source instance
   instance.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(instance<AppServiceClient>()));
 
-
+    instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceeImpl());
   // Repository Instance
 
-  instance.registerLazySingleton<Repository>(() => RepositoryImpl(instance<RemoteDataSource>(),instance<NetWorkInfo>())); 
+  instance.registerLazySingleton<Repository>(() => RepositoryImpl(instance<RemoteDataSource>(),instance<NetWorkInfo>(),instance<LocalDataSource>())); 
 }
 
 Future<void> initLoginModule() async {
@@ -107,6 +108,8 @@ Future<void> initHomeModule() async {
       instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance<Repository>()));
 
   instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance<HomeUseCase>()));
+
+
 
   }
 }

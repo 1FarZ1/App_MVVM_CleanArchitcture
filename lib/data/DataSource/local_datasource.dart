@@ -4,16 +4,19 @@ import 'package:providerlearn/data/Network/error_handler.dart';
 import 'package:providerlearn/data/Network/requests.dart';
 import 'package:providerlearn/data/Response/responses.dart';
 
+// the key of our cached data
 const CacheHomeKey = "Cache_Home_Key";
 const CacheHomeInterval = 60 * 1000; // 1 minute Cache in millis
 
 abstract class LocalDataSource {
   Future<HomeResponse> getHome();
   Future<void> SaveHomeToCache(HomeResponse homeresponse);
+  void clearCache();
+  void removeFromCache(String key);
 }
 
 class LocalDataSourceeImpl implements LocalDataSource {
-  Map<String, CachedItem> CacheMap = Map();
+  Map<String, CachedItem> CacheMap = {};
   @override
   Future<HomeResponse> getHome() async {
     CachedItem? cachedItem = CacheMap[CacheHomeKey];
@@ -22,18 +25,46 @@ class LocalDataSourceeImpl implements LocalDataSource {
       // return response from cache
       return cachedItem.data;
     } else {
+      throw ErrorHandler.handle(DataSource.CACHE_ERROR);
       // return an error that cache is not there or its not valid
     }
   }
 
   @override
   Future<void> SaveHomeToCache(homeresponse) async {
+    // for exemple here:
+    // {
+    //  "key here": {
+    //      "data": homeresponse,
+    //      "time": DateTime.now().millisecondsSinceEpoch
+    // }  ,
+    //  another one here is :
+    // "another_key": {
+    //  "data":storedData,
+    //  "time": DateTime.now().millisecondsSinceEpoch
+    // }
+    // }
     CacheMap[CacheHomeKey] = CachedItem(homeresponse);
+  }
+
+  @override
+  void clearCache() {
+    // remove all items from cache
+    CacheMap.clear();
+  }
+  
+  @override
+  void removeFromCache(String key) {
+    // remove a particular item from cache
+    CacheMap.remove(key);
   }
 }
 
 class CachedItem {
+  // the data that we want it locally
   dynamic data;
+
+  // when we added the cached item
   int cacheTime = DateTime.now().millisecondsSinceEpoch;
 
   CachedItem(this.data);
