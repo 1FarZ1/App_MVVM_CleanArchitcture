@@ -28,17 +28,18 @@ class StoreDetailsViewModel extends BaseViewModel
   }
 
   @override
-  Sink get inputStoreDetails => throw UnimplementedError();
+  Sink get inputStoreDetails => _dataStreamController.sink;
 
   @override
-  Stream<StoreDetails> get outputStoreDetails => throw UnimplementedError();
+  Stream<StoreDetails> get outputStoreDetails => _dataStreamController.stream.map((data) => 
+  data);
 
   _getHomeData() async {
     inputState.add(StateRendererType.fullScreenLoadingState);
     (await _useCase.excute(Void)).fold(
         (failure) => inputState.add(
             ErrorState(StateRendererType.popupErrorState, failure.message)),
-        (data) {
+        (data) async{
       inputState.add(ContentState());
       inputStoreDetails.add(data);
     });

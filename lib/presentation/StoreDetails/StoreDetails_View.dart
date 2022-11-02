@@ -28,30 +28,47 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<FlowState>(
-        stream: _viewmodel.outputState,
-        builder: (context, snapshot) {
-          return snapshot.data?.getScreenWidget(
-                  context: context,
-                  contentScreenWidget: _getContentWidget(),
-                  retryActionFunction: () {
-                    _viewmodel.start();
-                  }) ??
-              _getContentWidget();
-        });
+    return Scaffold(
+      body: StreamBuilder<FlowState>(
+          stream: _viewmodel.outputState,
+          builder: (context, snapshot) {
+            return snapshot.data?.getScreenWidget(
+                    context: context,
+                    contentScreenWidget: _getContentWidget(),
+                    retryActionFunction: () {
+                      _viewmodel.start();
+                    }) ??
+                Container();
+          }),
+    );
   }
 
   Widget _getContentWidget() {
-    return Scaffold(
-      body:
-      StreamBuilder<StoreDetails>(
+    return StreamBuilder<StoreDetails>(
         stream: _viewmodel.outputStoreDetails,
         builder: (context, snapshot) {
           return SingleChildScrollView(
-            child:Image.network(snapshot.data?.image ?? ''), 
+            child:_getItems(snapshot.data), 
            );
         }
-      ),
+    );
+  }
+
+  _getItems(data){
+    return Column(
+      children: [
+        Text(data.name),
+        Text(data.address),
+        Text(data.phone),
+        Text(data.email),
+        Text(data.website),
+        Text(data.description),
+        Text(data.openingHours),
+        Text(data.closingHours),
+        Text(data.latitude),
+        Text(data.longitude),
+        Text(data.image),
+      ],
     );
   }
 

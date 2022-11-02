@@ -22,7 +22,11 @@ abstract class LocalDataSource {
 }
 
 class LocalDataSourceeImpl implements LocalDataSource {
+
   Map<String, CachedItem> CacheMap = {};
+
+
+
   @override
   Future<HomeResponse> getHome() async {
     CachedItem? cachedItem = CacheMap[CacheHomeKey];
@@ -68,7 +72,7 @@ class LocalDataSourceeImpl implements LocalDataSource {
   @override
   Future<void> SaveStoreDetailsToCache(
       StoreDetailsResponse storeDetailsResponse) async {
-    CacheMap[CacheHomeKey] = CachedItem(storeDetailsResponse);
+    CacheMap[CacheStoreDetailsKey] = CachedItem(storeDetailsResponse);
     
   }
 

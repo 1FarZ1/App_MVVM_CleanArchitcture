@@ -13,9 +13,11 @@ import 'package:providerlearn/data/Network/dioFactory.dart';
 import 'package:providerlearn/data/repository/repo_impl.dart';
 import 'package:providerlearn/domaine/UseCase/LoginUseCase.dart';
 import 'package:providerlearn/domaine/UseCase/RegisterUseCase.dart';
+import 'package:providerlearn/domaine/UseCase/StoreDetaillsUseCase.dart';
 import 'package:providerlearn/domaine/UseCase/forgetPasswordUseCase.dart';
 import 'package:providerlearn/domaine/UseCase/home_usecase.dart';
 import 'package:providerlearn/presentation/ForgetPassword/forget_password_ViewModel.dart';
+import 'package:providerlearn/presentation/StoreDetails/StoreDetails_ViewModel.dart';
 import 'package:providerlearn/presentation/login/Login_ViewModel.dart';
 import 'package:providerlearn/presentation/main/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:providerlearn/presentation/register/Register_ViewModel.dart';
@@ -108,6 +110,18 @@ Future<void> initHomeModule() async {
       instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance<Repository>()));
 
   instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance<HomeUseCase>()));
+
+
+
+  }
+}
+Future<void> initStoreDetailsModule() async {
+  // Register Module is a module Where we Put All Depandencies Related to Register
+
+  if(!GetIt.I.isRegistered<StoreDetailsUseCase>()){
+      instance.registerFactory<StoreDetailsUseCase>(() => StoreDetailsUseCase(instance<Repository>()));
+
+  instance.registerFactory<StoreDetailsViewModel>(() => StoreDetailsViewModel(instance<StoreDetailsUseCase>()));
 
 
 
