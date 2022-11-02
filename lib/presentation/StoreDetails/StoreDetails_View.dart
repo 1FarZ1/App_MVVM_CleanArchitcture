@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:providerlearn/app/dependacyinjection.dart';
+import 'package:providerlearn/domaine/models/Models.dart';
 import 'package:providerlearn/presentation/StoreDetails/StoreDetails_ViewModel.dart';
 import 'package:providerlearn/presentation/common/state_renderer/state_renderer_impl.dart';
 
@@ -42,7 +43,15 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
 
   Widget _getContentWidget() {
     return Scaffold(
-      
+      body:
+      StreamBuilder<StoreDetails>(
+        stream: _viewmodel.outputStoreDetails,
+        builder: (context, snapshot) {
+          return SingleChildScrollView(
+            child:Image.network(snapshot.data?.image ?? ''), 
+           );
+        }
+      ),
     );
   }
 

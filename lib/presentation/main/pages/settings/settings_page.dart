@@ -1,5 +1,6 @@
 import 'package:providerlearn/app/dependacyinjection.dart';
 import 'package:providerlearn/app/preferences.dart';
+import 'package:providerlearn/data/DataSource/local_datasource.dart';
 // import 'package:providerlearn/data/data_source/.dart';
 import 'package:providerlearn/presentation/resources/ImageManager.dart';
 import 'package:providerlearn/presentation/resources/LanguageManager.dart';
@@ -22,7 +23,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
-  // final LocalDataSource _localDataSource = instance<LocalDataSource>();
+  final LocalDataSource _localDataSource = instance<LocalDataSource>();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +111,7 @@ class _SettingsPageState extends State<SettingsPage> {
     // _appPreferences.logout();
 
     // clear cache of logged out user
-    // _localDataSource.clearCache();
+    _localDataSource.clearCache();
 
     // navigate to login screen
     Navigator.pushReplacementNamed(context, Routes.loginRoute);

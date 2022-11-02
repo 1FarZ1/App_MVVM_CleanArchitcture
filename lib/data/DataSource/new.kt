@@ -27,6 +27,7 @@ fun main(){
     val age = 20
     val result6 = "My name is $name and my age is $age"
     println(result6)
+
     
 
 }
