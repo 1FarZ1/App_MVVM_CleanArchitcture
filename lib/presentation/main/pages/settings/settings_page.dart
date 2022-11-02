@@ -13,7 +13,6 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
-
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -50,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: Theme.of(context).textTheme.bodyLarge),
             trailing: Transform(
               alignment: Alignment.center,
-              transform: Matrix4.rotationY(0),  // isRtl() ? math.pi : 0
+              transform: Matrix4.rotationY(0), // isRtl() ? math.pi : 0
               child: SvgPicture.asset(ImageAssets.rightArrowSettingsIc),
             ),
             onTap: () {
@@ -63,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: Theme.of(context).textTheme.bodyLarge),
             trailing: Transform(
               alignment: Alignment.center,
-              transform: Matrix4.rotationY(0),//isRtl() ? math.pi : 0
+              transform: Matrix4.rotationY(0), //isRtl() ? math.pi : 0
               child: SvgPicture.asset(ImageAssets.rightArrowSettingsIc),
             ),
             onTap: () {
@@ -94,7 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   _changeLanguage() {
     // i will implement it later
-    // _appPreferences.changeAppLanguage();
+    _appPreferences.setAppLanguage();
     Phoenix.rebirth(context);
   }
 

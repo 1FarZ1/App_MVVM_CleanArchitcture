@@ -34,6 +34,16 @@ class AppPreferences {
     Future<bool?> OnBoardingScreenViewed() async {
     return _sharedPreferences.getBool(PREFS_KEY_ONBOARDING_SCREEN_VIEWED);
   }
+
+  Future<void> setAppLanguage()async{
+    var currentLanguage = await GetApplicationLanguage();
+    if(currentLanguage == LanguageType.ENGLISH.LanguageName){
+      await _sharedPreferences.setString('ApplicationLanguage', LanguageType.Arabic.LanguageName);
+    }else{
+      await _sharedPreferences.setString('ApplicationLanguage', LanguageType.ENGLISH.LanguageName);
+    }
+  
+  }
   
   
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:providerlearn/app/app.dart';
 import 'package:providerlearn/app/dependacyinjection.dart';
+import 'package:providerlearn/presentation/resources/languageManager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,15 +11,13 @@ void main() async {
   await initAppModule();
   runApp
   (
-    Phoenix(child: MyApp()),
     
-    
-    // EasyLocalization(
-    //   supportedLocales: const [ARABIC_LOCAL, ENGLISH_LOCAL],
-    //   path: ASSET_PATH_LOCALISATIONS,
-    //   child: 
-    //   Phoenix(child: MyApp())
-    //   )
+    EasyLocalization(
+      supportedLocales: const [Arabic_Local, English_Local],
+      path: AssetPathLocalisation,
+      child: 
+      Phoenix(child: MyApp())
+      )
     
       );
 }
