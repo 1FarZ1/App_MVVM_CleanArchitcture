@@ -1,6 +1,9 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors_in_immutables, non_constant_identifier_names
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:providerlearn/app/dependacyinjection.dart';
+import 'package:providerlearn/app/preferences.dart';
 import 'package:providerlearn/presentation/resources/RoutesManager.dart';
 import 'package:providerlearn/presentation/resources/ThemeManager.dart';
 
@@ -21,10 +24,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _appPreferences.getLocal().then((Local) =>context.setLocale(Local));
+  }
    
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,

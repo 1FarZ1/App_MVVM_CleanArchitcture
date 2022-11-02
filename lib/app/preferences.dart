@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_field, prefer_final_fields, non_constant_identifier_names, unused_local_variable, constant_identifier_names
+import 'package:flutter/material.dart';
 import 'package:providerlearn/presentation/resources/languageManager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,6 +44,16 @@ class AppPreferences {
       await _sharedPreferences.setString('ApplicationLanguage', LanguageType.ENGLISH.LanguageName);
     }
   
+  }
+
+    Future<Locale> getLocal() async {
+    String currentLang = await GetApplicationLanguage();
+
+    if (currentLang == LanguageType.Arabic.LanguageName) {
+      return Arabic_Local;
+    } else {
+      return English_Local;
+    }
   }
   
   
